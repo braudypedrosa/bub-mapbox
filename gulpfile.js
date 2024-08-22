@@ -6,38 +6,78 @@ const terser = require('gulp-terser');
 const gulpIf = require('gulp-if');
 const yargs = require('yargs');
 const zip = require('gulp-zip');
+const babel = require('gulp-babel');
+const webpack = require('webpack-stream');
 
 const argv = yargs.argv;
 const isProduction = argv.prod;
 
-function public_scripts() {
-  return gulp.src('assets/scss/public/*.scss')
+function public_styles() {
+  return gulp.src('assets/scss/public-bundle.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('bundled-main.css'))
     .pipe(gulpIf(isProduction, cleanCSS()))
     .pipe(gulp.dest('dist/css/public'));
 }
 
-
-function public_styles() {
-  return gulp.src('assets/js/public/*.js')
-    .pipe(concat('bundled-main.js'))
+function public_scripts() {
+  return gulp.src('assets/js/public-bundle.js')
+    .pipe(webpack({
+      mode: isProduction ? 'production' : 'development',
+      output: {
+        filename: 'bundled-main.js',
+      },
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env']
+              }
+            }
+          }
+        ]
+      },
+      devtool: !isProduction ? 'inline-source-map' : false,
+    }))
     .pipe(gulpIf(isProduction, terser()))
     .pipe(gulp.dest('dist/js/public'));
 }
 
-function admin_scripts() {
-  return gulp.src('assets/scss/admin/*.scss')
+function admin_styles() {
+  return gulp.src('assets/scss/admin-bundle.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('bundled-main.css'))
     .pipe(gulpIf(isProduction, cleanCSS()))
     .pipe(gulp.dest('dist/css/admin'));
 }
 
-
-function admin_styles() {
-  return gulp.src('assets/js/admin/*.js')
-    .pipe(concat('bundled-main.js'))
+function admin_scripts() {
+  return gulp.src('assets/js/admin-bundle.js')
+    .pipe(webpack({
+      mode: isProduction ? 'production' : 'development',
+      output: {
+        filename: 'bundled-main.js',
+      },
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env']
+              }
+            }
+          }
+        ]
+      },
+      devtool: !isProduction ? 'inline-source-map' : false,
+    }))
     .pipe(gulpIf(isProduction, terser()))
     .pipe(gulp.dest('dist/js/admin'));
 }
@@ -45,25 +85,25 @@ function admin_styles() {
 function zipFiles() {
   return gulp.src([
       '**/*',
-      '!node_modules/**', // Ignore everything in node_modules
-      'node_modules/bootstrap/dist/**', // Except for Bootstrap
+      '!node_modules/**',
+      'node_modules/bootstrap/dist/**',
       '!bundled/**',
       'dist/**',
       '!gulpfile.js',
       '!package-lock.json'
-    ], { base: '.' }) // Maintain the directory structure
+    ], { base: '.' })
     .pipe(zip('bub-mapbox.zip'))
     .pipe(gulp.dest('bundled'));
 }
 
 function watchFiles() {
-  gulp.watch('assets/scss/public/*.scss', public_scripts);
-  gulp.watch('assets/js/public/*.js', public_styles);
-  gulp.watch('assets/scss/admin/*.scss', admin_scripts);
-  gulp.watch('assets/js/admin/*.js', admin_styles);
+  gulp.watch('assets/scss/public/*.scss', public_styles);
+  gulp.watch('assets/js/public/*.js', public_scripts);
+  gulp.watch('assets/scss/admin/*.scss', admin_styles);
+  gulp.watch('assets/js/admin/*.js', admin_scripts);
 }
 
-const build = gulp.parallel(public_scripts, public_styles, admin_scripts, admin_styles);
+const build = gulp.parallel(public_styles, public_scripts, admin_styles, admin_scripts);
 const watch = gulp.series(build, watchFiles);
 gulp.task('zip', gulp.series(build, zipFiles));
 
