@@ -1,0 +1,29 @@
+{
+    "name": "bub-mapbox",
+    "version": "1.0",
+    "description": "Mapbox integration with WordPress",
+    "main": "index.js",
+    "scripts": {
+        "build": "gulp build",
+        "watch": "gulp watch",
+        "zip": "gulp zip",
+        "deploy": "gulp build && gulp zip"  
+    },
+    "keywords": ["mapbox"],
+    "author": "Braudy Pedrosa",
+    "license": "ISC",
+    "dependencies": {
+        "yargs": "^17.0.1"
+    },
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-if": "^3.0.0",
+        "gulp-sass": "^5.0.0",
+        "gulp-terser": "^1.4.0",
+        "gulp-zip": "^5.1.0",
+        "sass": "^1.32.8"
+  }
+}
+  
