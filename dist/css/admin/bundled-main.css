@@ -1,0 +1,21 @@
+.bub_mapbox_settings_page {
+  max-width: 1024px;
+  width: 80%;
+  margin: 60px auto;
+  background: rgb(241, 241, 241);
+  padding: 20px;
+  border: 1px solid;
+  border-radius: 8px;
+}
+.bub_mapbox_settings_page h2 {
+  margin-bottom: 1rem;
+}
+.bub_mapbox_settings_page span {
+  font-size: 14px;
+  line-height: 2rem;
+}
+.bub_mapbox_settings_page .notice {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+}

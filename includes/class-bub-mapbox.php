@@ -21,6 +21,7 @@ class BUB_Mapbox {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/required-plugins.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/enqueue.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/settings.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/post-types.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/custom-menu.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/shortcodes.php';

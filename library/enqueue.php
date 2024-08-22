@@ -1,23 +1,42 @@
 <?php
 
-add_action('wp_enqueue_scripts', BUB_PLUGIN_NAME . '_enqueue_styles_scripts');
+add_action('wp_enqueue_scripts', BUB_PLUGIN_NAME . '_enqueue_public_styles_scripts');
+add_action('admin_enqueue_scripts', BUB_PLUGIN_NAME . '_enqueue_admin_styles_scripts');
 
-function bub_mapbox_enqueue_styles_scripts() {
+function bub_mapbox_enqueue_public_styles_scripts() {
+    bub_mapbox_external_public_styles_scripts();
+    bub_mapbox_public_styles_scripts();
+}
 
-    wp_enqueue_style(
-        BUB_PLUGIN_NAME . '-style', 
-        plugin_dir_url( dirname( __FILE__ ) ) . 'dist/css/bundled-main.css',
-        array(), 
-        BUB_MAPBOX_VERSION, 
-        'all' 
-    );
+function bub_mapbox_enqueue_admin_styles_scripts() {
+    $screen = get_current_screen();
+    if ($screen->id == 'mapbox-location_page_locations-settings') {
+        bub_mapbox_external_admin_styles_scripts();
+        bub_mapbox_admin_styles_scripts();
+    }
+}
 
-    wp_enqueue_script(
-        BUB_PLUGIN_NAME . '-script', 
-        plugin_dir_url( dirname( __FILE__ ) ) . 'dist/js/bundled-main.js',
-        array('jquery'), 
-        BUB_MAPBOX_VERSION,
-        true
-    );
 
+function bub_mapbox_public_styles_scripts() {
+    wp_enqueue_style(BUB_PLUGIN_NAME . '-style', plugin_dir_url(dirname(__FILE__)) . 'dist/css/public/bundled-main.css', [], BUB_MAPBOX_VERSION, 'all');
+    wp_enqueue_script(BUB_PLUGIN_NAME . '-script', plugin_dir_url(dirname(__FILE__)) . 'dist/js/public/bundled-main.js', ['jquery'], BUB_MAPBOX_VERSION, true);
+}
+
+function bub_mapbox_external_public_styles_scripts() {
+
+    // Mapbox
+    wp_enqueue_style(BUB_PLUGIN_NAME . '-mapbox', 'https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css', [], BUB_MAPBOX_VERSION, 'all');
+    wp_enqueue_script(BUB_PLUGIN_NAME . '-mapbox', 'https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js', [], BUB_MAPBOX_VERSION, true);
+}
+
+function bub_mapbox_admin_styles_scripts() {
+    wp_enqueue_style(BUB_PLUGIN_NAME . '-style', plugin_dir_url(dirname(__FILE__)) . 'dist/css/admin/bundled-main.css', [], BUB_MAPBOX_VERSION, 'all');
+    wp_enqueue_script(BUB_PLUGIN_NAME . '-script', plugin_dir_url(dirname(__FILE__)) . 'dist/js/admin/bundled-main.js', ['jquery'], BUB_MAPBOX_VERSION, true);
+}
+
+function bub_mapbox_external_admin_styles_scripts() {
+
+    // Bootstrap
+    wp_enqueue_style(BUB_PLUGIN_NAME . '-bootstrap', plugin_dir_url(dirname(__FILE__)) . 'node_modules/bootstrap/dist/css/bootstrap.min.css', [], BUB_MAPBOX_VERSION, 'all');
+    wp_enqueue_script(BUB_PLUGIN_NAME . '-bootstrap', plugin_dir_url(dirname(__FILE__)) . 'node_modules/bootstrap/dist/js/bootstrap.min.js', [], BUB_MAPBOX_VERSION, true);
 }

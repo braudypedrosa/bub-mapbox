@@ -28,7 +28,7 @@ function register_custom_post_type() {
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-        'rewrite'            => array( 'slug' => 'location' ),
+        'rewrite'            => array( 'slug' => 'mapbox-location' ),
         'capability_type'    => 'post',
         'has_archive'        => true,
         'hierarchical'       => false,
@@ -37,7 +37,7 @@ function register_custom_post_type() {
         'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt' )
     );
 
-    register_post_type( 'location', $args );
+    register_post_type( 'mapbox-location', $args );
 }
 
 
