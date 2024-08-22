@@ -4,7 +4,8 @@ Plugin Name: Mapbox by Buildup Bookings
 Description: Mapbox integration with WordPress
 Version: 1.0
 Author: Braudy Pedrosa
-License: GPL2
+Author URI: https://buildupbookings.com//
+License: GPL-2.0+
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,20 +14,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Define constants
 define( 'BUB_MAPBOX_VERSION', '1.0' );
-define( 'BUB_MAPBOX_DIR', plugin_dir_path( __FILE__ ) );
-define( 'BUB_MAPBOX_URL', plugin_dir_url( __FILE__ ) );
+define( 'BUB_PLUGIN_NAME', 'bub_mapbox' );
+
 
 // Include required files
-require_once BUB_MAPBOX_DIR . 'includes/class-plugin-boilerplate.php';
-require_once BUB_MAPBOX_DIR . 'includes/helpers.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-bub-mapbox.php';
 
-// Activation and Deactivation hooks
-register_activation_hook( __FILE__, array( 'BUB_MAPBOX', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'BUB_MAPBOX', 'deactivate' ) );
+
+function activate_bub_mapbox() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-bub-mapbox-activator.php';
+	BUB_Activator::activate();
+}
+
+function deactivate_bub_mapbox() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-bub-mapbox-deactivator.php';
+	BUB_Deactivator::deactivate();
+}
+
+register_activation_hook( __FILE__, 'activate_bub_mapbox' );
+register_deactivation_hook( __FILE__, 'deactivate_bub_mapbox' );
+
 
 // Initialize the plugin
-function run_BUB_MAPBOX() {
+function run_bub_mapbox() {
     $plugin = new BUB_Mapbox();
     $plugin->run();
 }
-add_action( 'plugins_loaded', 'run_BUB_MAPBOX' );
+
+add_action( 'plugins_loaded', 'run_bub_mapbox' );

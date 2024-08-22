@@ -7,18 +7,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 class BUB_Mapbox {
     
     public function __construct() {
-        // Constructor code here
+        
     }
 
     public function run() {
-        // Run the plugin code here
+
+        $this->load_dependencies();
+
     }
 
-    public static function activate() {
-        // Code to run on plugin activation
+    public function load_dependencies() {
+
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/required-plugins.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/helpers.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/enqueue.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/post-types.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/custom-menu.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/shortcodes.php';
+
     }
 
-    public static function deactivate() {
-        // Code to run on plugin deactivation
-    }
 }
