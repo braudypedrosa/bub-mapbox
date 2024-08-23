@@ -1,0 +1,13 @@
+.response-notice {
+    color: white;
+    padding: 10px;
+    
+    &.fail {
+        background-color: red;
+    }
+
+    &.success {
+        background-color: green;
+    }
+    
+}

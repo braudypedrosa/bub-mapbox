@@ -5,7 +5,7 @@
     "active": true,
     "taxonomy": "mapbox_category",
     "object_type": [
-        "location"
+        "mapbox-location"
     ],
     "advanced_configuration": 1,
     "import_source": "",
@@ -71,5 +71,5 @@
     "meta_box": "default",
     "meta_box_cb": "",
     "meta_box_sanitize_cb": "",
-    "modified": 1724345198
+    "modified": 1724369015
 }

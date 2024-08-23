@@ -6,7 +6,9 @@ $plugin_settings = get_plugin_settings();
 
 <div class="bub_mapbox_settings_page">
 
-    <?php displayNotice($_GET['status'], $_GET['msg']); ?>
+    <?php if(isset($_GET['status'])) {
+        displayNotice($_GET['status'], $_GET['msg']);
+    } ?>
 
     <h2>Mapbox Settings</h2>
 

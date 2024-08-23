@@ -35,3 +35,47 @@ function displayMessage($response) {
     return '<div class="response-notice '.$response['code'].'">'.$response['message'].'</div>';
 }
 
+function get_lat_long_from_address($address) {
+    $apiKey = 'AIzaSyDrgKGYvYwL1tV68mmv7Q_wCB8muFkmMBE'; // Replace with your actual API key
+    $address = urlencode($address);
+    $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$apiKey}";
+
+    $response = wp_remote_get($url);
+
+    if (is_wp_error($response)) {
+        error_log('Error fetching data from Google API: ' . $response->get_error_message());
+        return false;
+    }
+
+    $body = wp_remote_retrieve_body($response);
+    $data = json_decode($body);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        error_log('JSON decode error: ' . json_last_error_msg());
+        return false;
+    }
+
+    if (empty($data->results)) {
+        error_log('No results found for the address: ' . urldecode($address));
+        return false;
+    }
+
+    $location = $data->results[0]->geometry->location;
+    $lat = $location->lat;
+    $lng = $location->lng;
+
+    return array('lat' => $lat, 'lng' => $lng);
+}
+
+
+function get_mapbox_location_ids() {
+    $args = array(
+        'post_type'      => 'mapbox-location',
+        'posts_per_page' => -1, // Retrieve all posts
+        'fields'         => 'ids', // Only get post IDs
+    );
+
+    $location_ids = get_posts($args);
+
+    return $location_ids; // This will be an array of post IDs
+}
