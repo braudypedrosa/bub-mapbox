@@ -13,7 +13,7 @@ const argv = yargs.argv;
 const isProduction = argv.prod;
 
 function public_styles() {
-  return gulp.src('assets/scss/public-bundle.scss')
+  return gulp.src('src/scss/public-bundle.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('bundled-main.css'))
     .pipe(gulpIf(isProduction, cleanCSS()))
@@ -21,7 +21,7 @@ function public_styles() {
 }
 
 function public_scripts() {
-  return gulp.src('assets/js/public-bundle.js')
+  return gulp.src('src/js/public-bundle.js')
     .pipe(webpack({
       mode: isProduction ? 'production' : 'development',
       output: {
@@ -48,7 +48,7 @@ function public_scripts() {
 }
 
 function admin_styles() {
-  return gulp.src('assets/scss/admin-bundle.scss')
+  return gulp.src('src/scss/admin-bundle.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('bundled-main.css'))
     .pipe(gulpIf(isProduction, cleanCSS()))
@@ -56,7 +56,7 @@ function admin_styles() {
 }
 
 function admin_scripts() {
-  return gulp.src('assets/js/admin-bundle.js')
+  return gulp.src('src/js/admin-bundle.js')
     .pipe(webpack({
       mode: isProduction ? 'production' : 'development',
       output: {
@@ -97,10 +97,10 @@ function zipFiles() {
 }
 
 function watchFiles() {
-  gulp.watch('assets/scss/public/*.scss', public_styles);
-  gulp.watch('assets/js/public/*.js', public_scripts);
-  gulp.watch('assets/scss/admin/*.scss', admin_styles);
-  gulp.watch('assets/js/admin/*.js', admin_scripts);
+  gulp.watch('src/scss/public/*.scss', public_styles);
+  gulp.watch('src/js/public/*.js', public_scripts);
+  gulp.watch('src/scss/admin/*.scss', admin_styles);
+  gulp.watch('src/js/admin/*.js', admin_scripts);
 }
 
 const build = gulp.parallel(public_styles, public_scripts, admin_styles, admin_scripts);

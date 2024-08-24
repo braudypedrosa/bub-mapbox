@@ -1,0 +1,76 @@
+@use 'helpers' as *;
+
+.bubmapbox-container {
+    max-width: 100%;
+
+    .map-toggles {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        padding: 30px;
+
+        @include maxBreakpoint('sm') {
+            justify-content: flex-start;
+            margin: 15px 0px;
+            overflow-x: scroll;
+        }
+
+        span {
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border-bottom: 1px solid transparent;
+
+            &:hover {
+                transition: all 0.3s ease-in-out;
+                border-bottom: 1px solid;
+            }
+
+            &.active {
+                font-weight: bold;
+                border-bottom: 1px solid;
+            }
+        }
+    }
+
+    .bubmapbox-map {
+        width: 100%; 
+        min-height: 600px;
+
+
+        .marker-popup {
+            padding: 20px 10px;
+
+            .address, .phone, .description {
+                font-size: 14px;
+            }
+
+            .distance {
+                display: block;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+
+            .marker-name {
+                font-size: 24px;
+                margin: 0;
+                margin-bottom: 15px;
+                font-weight: bold;
+            }
+
+            .marker-button {
+                display: block;
+                margin-top: 20px;
+                font-size: 16px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+        }
+
+        .mapboxgl-popup-close-button {
+            outline: none;
+            background: transparent!important;
+            font-size: 14px;
+            padding: 5px;
+        }
+    }
+}

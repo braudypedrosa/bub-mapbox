@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 .response-notice {
   color: white;
   padding: 10px;
@@ -7,4 +8,61 @@
 }
 .response-notice.success {
   background-color: green;
+}
+
+.bubmapbox-container {
+  max-width: 100%;
+}
+.bubmapbox-container .map-toggles {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  padding: 30px;
+}
+.bubmapbox-container .map-toggles span {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid transparent;
+}
+.bubmapbox-container .map-toggles span:hover {
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid;
+}
+.bubmapbox-container .map-toggles span.active {
+  font-weight: bold;
+  border-bottom: 1px solid;
+}
+.bubmapbox-container .bubmapbox-map {
+  width: 100%;
+  min-height: 600px;
+}
+.bubmapbox-container .bubmapbox-map .marker-popup {
+  padding: 20px 10px;
+}
+.bubmapbox-container .bubmapbox-map .marker-popup .address, .bubmapbox-container .bubmapbox-map .marker-popup .phone, .bubmapbox-container .bubmapbox-map .marker-popup .description {
+  font-size: 14px;
+}
+.bubmapbox-container .bubmapbox-map .marker-popup .distance {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.bubmapbox-container .bubmapbox-map .marker-popup .marker-name {
+  font-size: 24px;
+  margin: 0;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+.bubmapbox-container .bubmapbox-map .marker-popup .marker-button {
+  display: block;
+  margin-top: 20px;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.bubmapbox-container .bubmapbox-map .mapboxgl-popup-close-button {
+  outline: none;
+  background: transparent !important;
+  font-size: 14px;
+  padding: 5px;
 }

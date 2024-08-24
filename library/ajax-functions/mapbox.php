@@ -5,14 +5,8 @@ add_action('wp_ajax_nopriv_get_mapbox_locations', 'bub_get_mapbox_locations');
 
 function bub_get_mapbox_locations() {
 
-    // Verify the nonce for security
-    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], BUB_PLUGIN_NAME . '_nonce')) {
-        wp_send_json_error('Invalid nonce');
-        return;
-    }
-
     // Get the locations parameter
-    $locations_param = isset($_POST['locations']) ? $_POST['locations'] : 'all';
+    $locations_param = isset($_GET['locations']) ? $_GET['locations'] : 'all';
 
     // Set up the query arguments
     $args = array(
@@ -41,6 +35,10 @@ function bub_get_mapbox_locations() {
             $phone = get_field('phone_number', $id);
             $website = get_field('website', $id);
             $coordinates = get_field('coordinates', $id);
+            $distance = get_field('distance', $id);
+            $walktime = get_field('walk_time', $id);
+
+            $category = get_the_terms($id, 'mapbox_category')[0];
 
             $lat = isset($coordinates['latitude']) ? $coordinates['latitude'] : '';
             $lng = isset($coordinates['longitude']) ? $coordinates['longitude'] : '';
@@ -64,16 +62,21 @@ function bub_get_mapbox_locations() {
                 ), $id);
             }
 
-            $mapbox_details[] = array(
-                'title'       => $title,
-                'description' => $description,
-                'address'     => $address,
-                'phone'       => $phone,
-                'website'     => $website,
-                'lat'         => $lat,
-                'lng'         => $lng,
-                'source'      => $source
-            );
+            if($address) {
+                $mapbox_details[] = array(
+                    'title'       => $title,
+                    'description' => $description,
+                    'address'     => $address,
+                    'phone'       => $phone,
+                    'website'     => $website,
+                    'lat'         => $lat,
+                    'lng'         => $lng,
+                    'distance'    => $distance,
+                    'walktime'    => $walktime,
+                    'category'    => $category->name,
+                    'source'      => $source
+                );
+            }
         }
 
         wp_reset_postdata(); // Always reset the post data after a custom query
@@ -81,4 +84,29 @@ function bub_get_mapbox_locations() {
 
     // Return the array of locations as a JSON response
     wp_send_json_success($mapbox_details);
+}
+
+
+function bub_mapbox_categories() {
+
+    // Query for all non-empty terms in 'mapbox_category' taxonomy
+    $terms = get_terms(array(
+        'taxonomy' => 'mapbox_category',
+        'hide_empty' => true, // This ensures only non-empty terms are returned
+    ));
+
+    // Prepare an array to hold the term names
+    $term_names = array();
+
+    if (!empty($terms) && !is_wp_error($terms)) {
+        foreach ($terms as $term) {
+            $term_names[] = $term->name;
+        }
+    }
+
+    // Return the array of names as a JSON response
+    wp_send_json_success($term_names);
+
+    // Always die in the AJAX function
+    wp_die();
 }

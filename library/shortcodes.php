@@ -23,13 +23,11 @@ function bub_mapbox_builder_func( $atts ) {
             $locations_id = 'all';
             
         } else {
-
             $locations_id = json_encode($locations);
-
         }
 
 
-        return '<div class="bubmapbox_map" data-mapid="'.$shortcode_atts['id'].'" data-locations="'.$locations_id.'"></div>';
+        return '<div class="bubmapbox-container"><div class="map-toggles"></div><div class="bubmapbox-map" id="bubmapbox_map_'.$shortcode_atts['id'].'" data-mapid="'.$shortcode_atts['id'].'" data-locations="'.$locations_id.'"></div></div>';
     }  
 
 }

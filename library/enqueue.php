@@ -21,10 +21,10 @@ function bub_mapbox_public_styles_scripts() {
     wp_enqueue_style(BUB_PLUGIN_NAME . '-public-style', plugin_dir_url(dirname(__FILE__)) . 'dist/css/public/bundled-main.css', [], BUB_MAPBOX_VERSION, 'all');
     wp_enqueue_script(BUB_PLUGIN_NAME . '-public-script', plugin_dir_url(dirname(__FILE__)) . 'dist/js/public/bundled-main.js', ['jquery'], BUB_MAPBOX_VERSION, true);
 
-
     wp_localize_script(BUB_PLUGIN_NAME . '-public-script', BUB_PLUGIN_NAME  . '_ajax',  
         array(
             'plugin_settings' => get_plugin_settings(),
+            'directory_uri' => plugin_dir_url(dirname(__FILE__)),
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce(BUB_PLUGIN_NAME . '_nonce')
         )
