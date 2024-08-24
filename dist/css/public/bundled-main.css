@@ -19,6 +19,14 @@
   justify-content: center;
   padding: 30px;
 }
+@media screen and (max-width: 47.98rem) {
+  .bubmapbox-container .map-toggles {
+    justify-content: flex-start;
+    margin: 15px 0px;
+    overflow-x: scroll;
+    padding: 15px;
+  }
+}
 .bubmapbox-container .map-toggles span {
   cursor: pointer;
   transition: all 0.3s ease-in-out;

@@ -1,4 +1,4 @@
-@use 'helpers' as *;
+@use '../helpers/' as *;
 
 .bubmapbox-container {
     max-width: 100%;
@@ -13,6 +13,7 @@
             justify-content: flex-start;
             margin: 15px 0px;
             overflow-x: scroll;
+            padding: 15px;
         }
 
         span {
