@@ -18,12 +18,12 @@ $plugin_settings = get_plugin_settings();
 
         <div class="form-floating mb-3">
             <input type="text" class="form-control" required name="mapbox_token" value="<?= $plugin_settings->mapbox_token; ?>" placeholder="Mapbox Access Token">
-            <label for="mapboxAccessToken">Mapbox Access Token (required)</label>
+            <label>Mapbox Access Token (required)</label>
         </div>
 
         <div class="form-floating mb-3">
             <input type="text" class="form-control" name="mapbox_style" value="<?= $plugin_settings->mapbox_style; ?>" placeholder="Style">
-            <label for="mapStyle">Style</label>
+            <label>Style</label>
             <span>Place style url from mapbox, if left empty a default style will be used.</span>
         </div>
 

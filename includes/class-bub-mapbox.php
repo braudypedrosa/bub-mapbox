@@ -24,6 +24,7 @@ class BUB_Mapbox {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/settings.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/post-types.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/custom-menu.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/hooks.php';
     
         // include all ajax function
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'library/ajax-functions/mapbox.php';

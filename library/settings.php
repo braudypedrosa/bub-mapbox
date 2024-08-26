@@ -9,6 +9,7 @@ function save_settings() {
     $plugin_settings = json_encode($_POST);
 
     update_option( BUB_PLUGIN_NAME . '_plugin_settings', $plugin_settings );
+    update_option( BUB_PLUGIN_NAME . '_first_run', true );
     
     $response = array(
         'code' => 'success',
