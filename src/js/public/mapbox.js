@@ -57,10 +57,10 @@ import * as helper from './utility-functions';
             categories.forEach((item, index) => {
 
                 // Generate toggle menu
-                toggleContainer.append('<span ' + ((index === 0) ? 'class="active"' : '' ) + ' data-toggle="' + item + '">' + helper.unslugify(item) + '</span>');
+                toggleContainer.append('<span ' + ((index === 0) ? 'class="active"' : '' ) + ' data-toggle="' + item + '">' + helper.bub_mapbox_unslugify(item) + '</span>');
 
                 // Define custom icon
-                let mapIcon = directory_uri + 'assets/images/icons/' + helper.slugify(item) + '.png';
+                let mapIcon = directory_uri + 'assets/images/icons/' + helper.bub_mapbox_slugify(item) + '.png';
 
                 // Load the image only once per category
                 if (!mapbox_map.hasImage(item + '-icon')) {

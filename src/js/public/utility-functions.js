@@ -1,11 +1,11 @@
-export function unslugify(slug) {
+export function bub_mapbox_unslugify(slug) {
     return slug
         .split(/[-_]/)  
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))  
         .join(' ');
 }
 
-export function slugify(text) {
+export function bub_mapbox_slugify(text) {
     return text
         .toString()
         .toLowerCase()

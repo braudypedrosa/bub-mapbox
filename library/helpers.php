@@ -4,13 +4,14 @@ function get_plugin_settings() {
     return get_option(BUB_PLUGIN_NAME . '_plugin_settings') ? json_decode(get_option(BUB_PLUGIN_NAME . '_plugin_settings')) : '';
 }
 
-function slugify($text) {
+function bub_mapbox_slugify($text) {
     return strtolower(trim(preg_replace('~[^\\pL\d]+~u', '-', iconv('utf-8', 'us-ascii//TRANSLIT', $text)), '-'));
 }
 
-function unslugify($slug) {
+function bub_mapbox_unslugify($slug) {
     return ucwords(str_replace('-', ' ', $slug));
 }
+
 
 function displayNotice($code, $message) {
 
