@@ -3,6 +3,8 @@
 add_action('wp_enqueue_scripts', BUB_PLUGIN_NAME . '_enqueue_public_styles_scripts');
 add_action('admin_enqueue_scripts', BUB_PLUGIN_NAME . '_enqueue_admin_styles_scripts');
 
+$version = BUB_MAPBOX_VERSION . '.' . time(); // Incrementing version
+
 function bub_mapbox_enqueue_public_styles_scripts() {
     bub_mapbox_external_public_styles_scripts();
     bub_mapbox_public_styles_scripts();
@@ -18,8 +20,9 @@ function bub_mapbox_enqueue_admin_styles_scripts() {
 }
 
 function bub_mapbox_public_styles_scripts() {
-    wp_enqueue_style(BUB_PLUGIN_NAME . '-public-style', plugin_dir_url(dirname(__FILE__)) . 'dist/css/public/bundled-main.css', [], BUB_MAPBOX_VERSION, 'all');
-    wp_enqueue_script(BUB_PLUGIN_NAME . '-public-script', plugin_dir_url(dirname(__FILE__)) . 'dist/js/public/bundled-main.js', ['jquery'], BUB_MAPBOX_VERSION, true);
+    global $version;
+    wp_enqueue_style(BUB_PLUGIN_NAME . '-public-style', plugin_dir_url(dirname(__FILE__)) . 'dist/css/public/bundled-main.css', [], $version, 'all');
+    wp_enqueue_script(BUB_PLUGIN_NAME . '-public-script', plugin_dir_url(dirname(__FILE__)) . 'dist/js/public/bundled-main.js', ['jquery'], $version, true);
 
     wp_localize_script(BUB_PLUGIN_NAME . '-public-script', BUB_PLUGIN_NAME  . '_ajax',  
         array(
@@ -32,18 +35,21 @@ function bub_mapbox_public_styles_scripts() {
 }
 
 function bub_mapbox_external_public_styles_scripts() {
+    global $version;
     // Mapbox
-    wp_enqueue_style(BUB_PLUGIN_NAME . '-mapbox', 'https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css', [], BUB_MAPBOX_VERSION, 'all');
-    wp_enqueue_script(BUB_PLUGIN_NAME . '-mapbox', 'https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js', [], BUB_MAPBOX_VERSION, true);
+    wp_enqueue_style(BUB_PLUGIN_NAME . '-mapbox', 'https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css', [], $version, 'all');
+    wp_enqueue_script(BUB_PLUGIN_NAME . '-mapbox', 'https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js', [], $version, true);
 }
 
 function bub_mapbox_admin_styles_scripts() {
-    wp_enqueue_style(BUB_PLUGIN_NAME . '-admin-style', plugin_dir_url(dirname(__FILE__)) . 'dist/css/admin/bundled-main.css', [], BUB_MAPBOX_VERSION, 'all');
-    wp_enqueue_script(BUB_PLUGIN_NAME . '-admin-script', plugin_dir_url(dirname(__FILE__)) . 'dist/js/admin/bundled-main.js', ['jquery'], BUB_MAPBOX_VERSION, true);
+    global $version;
+    wp_enqueue_style(BUB_PLUGIN_NAME . '-admin-style', plugin_dir_url(dirname(__FILE__)) . 'dist/css/admin/bundled-main.css', [], $version, 'all');
+    wp_enqueue_script(BUB_PLUGIN_NAME . '-admin-script', plugin_dir_url(dirname(__FILE__)) . 'dist/js/admin/bundled-main.js', ['jquery'], $version, true);
 }
 
 function bub_mapbox_external_admin_styles_scripts() {
+    global $version;
     // Bootstrap
-    wp_enqueue_style(BUB_PLUGIN_NAME . '-bootstrap', plugin_dir_url(dirname(__FILE__)) . 'node_modules/bootstrap/dist/css/bootstrap.min.css', [], BUB_MAPBOX_VERSION, 'all');
-    wp_enqueue_script(BUB_PLUGIN_NAME . '-bootstrap', plugin_dir_url(dirname(__FILE__)) . 'node_modules/bootstrap/dist/js/bootstrap.min.js', [], BUB_MAPBOX_VERSION, true);
+    wp_enqueue_style(BUB_PLUGIN_NAME . '-bootstrap', plugin_dir_url(dirname(__FILE__)) . 'node_modules/bootstrap/dist/css/bootstrap.min.css', [], $version, 'all');
+    wp_enqueue_script(BUB_PLUGIN_NAME . '-bootstrap', plugin_dir_url(dirname(__FILE__)) . 'node_modules/bootstrap/dist/js/bootstrap.min.js', [], $version, true);
 }

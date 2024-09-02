@@ -1,6 +1,6 @@
 {
     "name": "bub-mapbox",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "description": "Mapbox integration with WordPress",
     "main": "index.js",
     "scripts": {
@@ -34,4 +34,3 @@
         "webpack-stream": "^7.0.0"
   }
 }
-  
