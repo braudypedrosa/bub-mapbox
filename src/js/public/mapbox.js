@@ -8,6 +8,8 @@ import * as helper from './utility-functions';
     const plugin_settings = bub_mapbox_ajax.plugin_settings;
     const directory_uri = bub_mapbox_ajax.directory_uri;
 
+    console.log('Plugin Settings: ' + plugin_settings);
+
     let style = plugin_settings.mapbox_style ? plugin_settings.mapbox_style : 'mapbox://styles/buildupbookings/clwl4g15g00tr01q17rjs6lm5';
     let mapbox_token = plugin_settings.mapbox_token;
     let defaultZoom = 14;
@@ -137,7 +139,7 @@ import * as helper from './utility-functions';
                                 });
                             }).setMaxWidth('320px');
 
-                            const marker = new mapboxgl.Marker()
+                            const marker = new mapboxgl.Marker({ color: plugin_settings.mapbox_marker_color ? plugin_settings.mapbox_marker_color : '#3da7c3' })
                                 .setLngLat(coordinates)
                                 .setPopup(popup)
                                 .addTo(mapbox_map);
