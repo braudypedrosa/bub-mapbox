@@ -139,7 +139,7 @@ import * as helper from './utility-functions';
                                 });
                             }).setMaxWidth('320px');
 
-                            const marker = new mapboxgl.Marker({ color: plugin_settings.mapbox_marker_color ? plugin_settings.mapbox_marker_color : '#3da7c3' })
+                            const marker = new mapboxgl.Marker({ color: (feature.properties.marker_color) ? feature.properties.marker_color : plugin_settings.mapbox_marker_color ? plugin_settings.mapbox_marker_color : '#3da7c3' })
                                 .setLngLat(coordinates)
                                 .setPopup(popup)
                                 .addTo(mapbox_map);

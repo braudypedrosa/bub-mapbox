@@ -37,6 +37,7 @@ function bub_get_mapbox_locations() {
             $coordinates = get_field('coordinates', $id);
             $distance = get_field('distance', $id);
             $walktime = get_field('walk_time', $id);
+            $marker_color = get_field('marker_color', $id) ? get_field('marker_color', $id) : '#0C8EDF';
 
             $category = get_the_terms($id, 'mapbox_category')[0];
 
@@ -74,7 +75,8 @@ function bub_get_mapbox_locations() {
                     'distance'    => $distance,
                     'walktime'    => $walktime,
                     'category'    => $category->name,
-                    'source'      => $source
+                    'source'      => $source,
+                    'marker_color' => $marker_color
                 );
             }
         }

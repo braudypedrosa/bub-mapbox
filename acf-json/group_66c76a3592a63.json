@@ -182,6 +182,24 @@
                     "append": ""
                 }
             ]
+        },
+        {
+            "key": "field_66db3fc9ee53f",
+            "label": "Marker Color",
+            "name": "marker_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#0C8EDF",
+            "enable_opacity": 0,
+            "return_format": "string"
         }
     ],
     "location": [
@@ -202,5 +220,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1724517179
+    "modified": 1725644884
 }

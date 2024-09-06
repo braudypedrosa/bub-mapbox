@@ -55,7 +55,8 @@ export function get_geojson( json_array ) {
                 "category": item.category,
                 "distance" : item.distance,
                 "walktime" : item.walktime,
-                "source": item.source
+                "source": item.source,
+                "marker_color": item.marker_color
             }
         }))
     };
