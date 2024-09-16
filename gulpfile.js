@@ -8,6 +8,7 @@ const yargs = require('yargs');
 const zip = require('gulp-zip');
 const babel = require('gulp-babel');
 const webpack = require('webpack-stream');
+const clean = require('gulp-clean'); // Import gulp-clean for cleanup
 
 const argv = yargs.argv;
 const isProduction = argv.prod;
@@ -83,6 +84,8 @@ function admin_scripts() {
 }
 
 function zipFiles() {
+  const pluginDirectory = 'bub-mapbox';
+  
   return gulp.src([
       '**/*',
       '!node_modules/**',
@@ -92,8 +95,16 @@ function zipFiles() {
       '!gulpfile.js',
       '!package-lock.json'
     ], { base: '.' })
-    .pipe(zip('bub-mapbox.zip'))
-    .pipe(gulp.dest('bundled'));
+    .pipe(gulp.dest(pluginDirectory)) // Create the top-level directory
+    .on('end', function() {
+      gulp.src(`${pluginDirectory}/**`, { base: '.' }) // Select the directory itself
+        .pipe(zip(`${pluginDirectory}.zip`)) // Zip the directory
+        .pipe(gulp.dest('bundled')) // Save the zip file
+        .on('end', function() {
+          return gulp.src(pluginDirectory, { read: false, allowEmpty: true })
+            .pipe(clean()); // Clean the directory after zipping
+        });
+    });
 }
 
 function watchFiles() {
