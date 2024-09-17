@@ -10,11 +10,14 @@ function bub_mapbox_builder_func( $atts ) {
 	), $atts );
 
     if( $shortcode_atts['id'] == '' ) {
-
         return displayMessage(['code' => 'fail', 'message' => 'Parameter "ID" is required (Example: [mapbox-map id="xx"])']);
-
     } else {
 
+        $settings = get_plugin_settings();
+
+        if(!check_plugin_settings($settings)) {
+            return displayMessage(['code' => 'fail', 'message' => 'Plugin settings are not configured properly.']);
+        }
 
         $locations = get_field('locations', $shortcode_atts['id']) ?? null;
 

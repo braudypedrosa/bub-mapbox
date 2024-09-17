@@ -80,3 +80,21 @@ function get_mapbox_location_ids() {
 
     return $location_ids; // This will be an array of post IDs
 }
+
+
+function check_plugin_settings() {
+    $settings = get_plugin_settings();
+
+    $required_settings = array(
+        'mapbox_token',
+        'mapbox_style',
+    );
+
+    foreach ($required_settings as $setting) {
+        if (empty($settings->$setting)) {
+            return false;
+        }
+    }
+
+    return true;
+}

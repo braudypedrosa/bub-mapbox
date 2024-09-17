@@ -2,22 +2,18 @@
 /*
 Plugin Name: Mapbox by Buildup Bookings
 Description: Mapbox integration with WordPress
-Version: 1.2.1
+Version: 1.2.2
 Author: Braudy Pedrosa
 Author URI: https://buildupbookings.com//
 License: GPL-2.0+
 */
-
-
-
-
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
 // Define constants
-define( 'BUB_MAPBOX_VERSION', '1.2.1' );
+define( 'BUB_MAPBOX_VERSION', '1.2.2' );
 define( 'BUB_PLUGIN_NAME', 'bub_mapbox' );
 
 // Include required files
