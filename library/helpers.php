@@ -1,6 +1,6 @@
 <?php
 
-function get_plugin_settings() {
+function bub_mapbox_settings() {
     return get_option(BUB_PLUGIN_NAME . '_plugin_settings') ? json_decode(get_option(BUB_PLUGIN_NAME . '_plugin_settings')) : '';
 }
 
@@ -83,7 +83,7 @@ function get_mapbox_location_ids() {
 
 
 function check_plugin_settings() {
-    $settings = get_plugin_settings();
+    $settings = bub_mapbox_settings();
 
     $required_settings = array(
         'mapbox_token',

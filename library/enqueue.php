@@ -30,7 +30,7 @@ function bub_mapbox_public_styles_scripts() {
 
     wp_localize_script(BUB_PLUGIN_NAME . '-public-script', BUB_PLUGIN_NAME  . '_ajax',  
         array(
-            'plugin_settings' => get_plugin_settings(),
+            'plugin_settings' => bub_mapbox_settings(),
             'directory_uri' => plugin_dir_url(dirname(__FILE__)),
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce(BUB_PLUGIN_NAME . '_nonce')

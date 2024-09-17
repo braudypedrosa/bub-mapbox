@@ -13,7 +13,7 @@ function bub_mapbox_builder_func( $atts ) {
         return displayMessage(['code' => 'fail', 'message' => 'Parameter "ID" is required (Example: [mapbox-map id="xx"])']);
     } else {
 
-        $settings = get_plugin_settings();
+        $settings = bub_mapbox_settings();
 
         if(!check_plugin_settings($settings)) {
             return displayMessage(['code' => 'fail', 'message' => 'Plugin settings are not configured properly.']);

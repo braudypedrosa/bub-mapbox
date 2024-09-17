@@ -1,6 +1,6 @@
 <?php 
 
-$plugin_settings = get_plugin_settings();
+$plugin_settings = bub_mapbox_settings();
 
 ?>
 
