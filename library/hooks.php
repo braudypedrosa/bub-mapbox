@@ -17,7 +17,7 @@ function bub_mapbox_geolocate_address($post_id, $post, $update) {
         if( empty($coordinates['latitude']) || empty($coordinates['longitude']) ) {
             error_log('Coordinate not found! Running geolocation!');
 
-            $new_coordinates = get_lat_long_from_address($address);
+            $new_coordinates = bub_mapbox_get_lat_long_from_address($address);
             
             update_field('coordinates', array(
                 'latitude' => $new_coordinates['lat'],

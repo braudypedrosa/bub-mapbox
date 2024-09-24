@@ -50,7 +50,7 @@ function bub_get_mapbox_locations() {
                 
                 // get lat and lng from address
                 if($address) {
-                    $lat_long = get_lat_long_from_address($address);
+                    $lat_long = bub_mapbox_get_lat_long_from_address($address);
                     $lat = $lat_long['lat'];
                     $lng = $lat_long['lng'];
                     $source = 'API';

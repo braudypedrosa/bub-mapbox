@@ -36,7 +36,7 @@ function displayMessage($response) {
     return '<div class="response-notice '.$response['code'].'">'.$response['message'].'</div>';
 }
 
-function get_lat_long_from_address($address) {
+function bub_mapbox_get_lat_long_from_address($address) {
     $apiKey = 'AIzaSyDrgKGYvYwL1tV68mmv7Q_wCB8muFkmMBE'; // Replace with your actual API key
     $address = urlencode($address);
     $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$apiKey}";
