@@ -200,6 +200,26 @@
             "default_value": "#0C8EDF",
             "enable_opacity": 0,
             "return_format": "string"
+        },
+        {
+            "key": "field_671125bad1c28",
+            "label": "Persist?",
+            "name": "persist",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Setting to yes will make this marker appear in any categories.",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
         }
     ],
     "location": [
@@ -220,5 +240,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1725644884
+    "modified": 1729177051
 }

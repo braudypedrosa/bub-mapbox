@@ -38,8 +38,9 @@ function bub_get_mapbox_locations() {
             $distance = get_field('distance', $id);
             $walktime = get_field('walk_time', $id);
             $marker_color = get_field('marker_color', $id) ? get_field('marker_color', $id) : '#0C8EDF';
+            $persist = get_field('persist', $id) ? get_field('persist', $id) : false;
 
-            $category = get_the_terms($id, 'mapbox_category')[0];
+            $categories = wp_get_post_terms($id, 'mapbox_category', array('fields' => 'names'));
 
             $lat = isset($coordinates['latitude']) ? $coordinates['latitude'] : '';
             $lng = isset($coordinates['longitude']) ? $coordinates['longitude'] : '';
@@ -74,15 +75,18 @@ function bub_get_mapbox_locations() {
                     'lng'         => $lng,
                     'distance'    => $distance,
                     'walktime'    => $walktime,
-                    'category'    => $category->name,
+                    'category'    => $categories,
                     'source'      => $source,
-                    'marker_color' => $marker_color
+                    'marker_color' => $marker_color,
+                    'persist'     => $persist
                 );
             }
         }
 
         wp_reset_postdata(); // Always reset the post data after a custom query
     }
+
+    error_log('Mapbox Details: ' . print_r($mapbox_details, true));
 
     // Return the array of locations as a JSON response
     wp_send_json_success($mapbox_details);

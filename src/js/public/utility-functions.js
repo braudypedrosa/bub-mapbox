@@ -1,6 +1,6 @@
 export function bub_mapbox_unslugify(slug) {
     return slug
-        .split(/[-_]/)  
+        .toString().split(/[-_]/)  
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))  
         .join(' ');
 }
@@ -56,7 +56,8 @@ export function get_geojson( json_array ) {
                 "distance" : item.distance,
                 "walktime" : item.walktime,
                 "source": item.source,
-                "marker_color": item.marker_color
+                "marker_color": item.marker_color,
+                "persist": item.persist
             }
         }))
     };

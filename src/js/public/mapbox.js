@@ -114,7 +114,7 @@ import * as helper from './utility-functions';
 
                         markers[item] = [];
                     
-                        geo_json.features.filter(feature => feature.properties.category === item).forEach(function(feature, featureIndex) {
+                        geo_json.features.filter(feature => feature.properties.category.includes(item) || feature.properties.persist === true).forEach(function(feature, featureIndex) {
                             const coordinates = feature.geometry.coordinates;
 
                             let popup_markup = `
@@ -149,6 +149,11 @@ import * as helper from './utility-functions';
                                 marker.getElement().style.display = 'block';
                             } else {
                                 marker.getElement().style.display = 'none';
+                            }
+
+                            // If the property has persist true, set the marker to be always on top
+                            if (feature.properties.persist === true) {
+                                marker.getElement().style.zIndex = '999';
                             }
 
                             markers[item].push(marker);

@@ -1,6 +1,6 @@
 export async function get_unique_categories(locations) {
     try {
-        const categories = locations.map(item => item.category); // Extract all categories
+        const categories = locations.flatMap(item => item.category); // Extract all categories, flattening arrays
         const unique_categories = [...new Set(categories)];  // Remove duplicates using Set
         return unique_categories;
     } catch (error) {
